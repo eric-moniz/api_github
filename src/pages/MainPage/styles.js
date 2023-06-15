@@ -29,6 +29,7 @@ export const Form = styled.div`
 
 export const Input = styled.input`
   background: rgba(0, 0, 0, 0.8);
+  color: ${(props) => props.theme.colors.text};
   width: 100%;
   height: 64px;
   line-height: 64px;
