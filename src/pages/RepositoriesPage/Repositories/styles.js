@@ -6,7 +6,7 @@ export const Container = styled.div`
   gap: 2rem;
   margin-top: 2rem;
 
-  @media screen and (max-width: ${(props) => props.theme.breakpoints.sm}) {
+  @media screen and (max-width: ${(props) => props.theme.breakpoints.md}) {
     grid-template-columns: auto;
   }
 `;
