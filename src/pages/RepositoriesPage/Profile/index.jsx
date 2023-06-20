@@ -1,36 +1,57 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { MdGroup, MdLocationCity, MdWork, MdLink } from "react-icons/md";
 
 import { Container, Header, Avatar, Login, Name, Inner, Data } from "./styles";
 
-export default function Profile() {
+export default function Profile({ user }) {
   return (
     <Container>
       <Header>
-        <Avatar src="https://avatars.githubusercontent.com/u/98990048?v=4" />
+        <Avatar src={user.avatar_url} />
       </Header>
-      <Login>eric-moniz</Login>
-      <Name>Eric Moniz</Name>
+      <Login>{user.login}</Login>
+      <Name>{user.name}</Name>
 
       <Inner>
         <Data>
           <MdGroup size={20} />
-          30&nbsp;<i>seguidores</i>&nbsp; &middot; 10&nbsp;<i>seguindo</i>
+          {user.following}&nbsp;<i>seguidores</i>&nbsp; &middot; &nbsp;
+          {user.followers}&nbsp;<i>seguindo</i>
         </Data>
-        <Data>
-          <MdWork size={20} />
-          Dev Samurai
-        </Data>
-        <Data>
-          <MdLocationCity size={20} />
-          São Bernardo do Campo
-        </Data>
-        <Data>
-          <MdLink size={20} />
-          <a href="https://github.com">link</a>
-        </Data>
+        {user.company && (
+          <Data>
+            <MdWork size={20} />
+            {user.company}
+          </Data>
+        )}
+        {user.location && (
+          <Data>
+            <MdLocationCity size={20} />
+            {user.location}
+          </Data>
+        )}
+        {user.blog && (
+          <Data>
+            <MdLink size={20} />
+            <a href={`\\${user.blog}`}>{user.blog}</a>
+          </Data>
+        )}
       </Inner>
     </Container>
   );
 }
+
+Profile.propTypes = {
+  user: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    login: PropTypes.string.isRequired,
+    avatar_url: PropTypes.string.isRequired,
+    followers: PropTypes.number.isRequired,
+    following: PropTypes.number.isRequired,
+    company: PropTypes.string,
+    blog: PropTypes.string,
+    location: PropTypes.string,
+  }).isRequired,
+};
