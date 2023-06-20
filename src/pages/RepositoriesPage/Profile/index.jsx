@@ -35,7 +35,14 @@ export default function Profile({ user }) {
         {user.blog && (
           <Data>
             <MdLink size={20} />
-            <a href={`\\${user.blog}`}>{user.blog}</a>
+            <a
+              style={{ color: "#CED4DA", textDecoration: "none" }}
+              href={`\\${user.blog}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {user.blog}
+            </a>
           </Data>
         )}
       </Inner>
