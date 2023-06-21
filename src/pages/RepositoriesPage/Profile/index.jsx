@@ -3,7 +3,16 @@ import PropTypes from "prop-types";
 
 import { MdGroup, MdLocationCity, MdWork, MdLink } from "react-icons/md";
 
-import { Container, Header, Avatar, Login, Name, Inner, Data } from "./styles";
+import {
+  Anchor,
+  Container,
+  Header,
+  Avatar,
+  Login,
+  Name,
+  Inner,
+  Data,
+} from "./styles";
 
 export default function Profile({ user }) {
   return (
@@ -35,14 +44,9 @@ export default function Profile({ user }) {
         {user.blog && (
           <Data>
             <MdLink size={20} />
-            <a
-              style={{ color: "#CED4DA", textDecoration: "none" }}
-              href={`\\${user.blog}`}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <Anchor href={`\\${user.blog}`} target="_blank" rel="noreferrer">
               {user.blog}
-            </a>
+            </Anchor>
           </Data>
         )}
       </Inner>

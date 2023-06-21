@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Profile from "./Profile";
 import Filter from "./Filter";
@@ -65,12 +65,21 @@ export default function RepositoriesPage() {
   ];
 
   const languages = getLangsFrom(repositories);
+  const [currentLanguage, setCurrentLanguage] = useState();
+
+  const onFilterClick = (language) => {
+    setCurrentLanguage(language);
+  };
 
   return (
     <Container>
       <Sidebar>
         <Profile user={user} />
-        <Filter languages={languages} />
+        <Filter
+          languages={languages}
+          currentLanguage={currentLanguage}
+          onClick={onFilterClick}
+        />
       </Sidebar>
 
       <Main>

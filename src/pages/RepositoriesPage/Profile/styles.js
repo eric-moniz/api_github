@@ -59,3 +59,12 @@ export const Data = styled.p`
     margin-right: 10px;
   }
 `;
+
+export const Anchor = styled.a`
+  color: ${(props) => props.theme.colors.text};
+  text-decoration: none;
+
+  &:hover {
+    color: ${(props) => props.theme.colors.gray600};
+  }
+`;
