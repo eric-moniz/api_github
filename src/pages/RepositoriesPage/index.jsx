@@ -2,7 +2,7 @@ import React from "react";
 
 import Profile from "./Profile";
 import Filter from "./Filter";
-import Repositories from "./Repositories";
+import Repositories from "./Repositories/index";
 import { getLangsFrom } from "../../services/api";
 
 import { Container, Sidebar, Main } from "./styles";
@@ -21,36 +21,42 @@ export default function RepositoriesPage() {
 
   const repositories = [
     {
+      id: "1",
       name: "Repo 1",
       description: "Descrição",
       hmtl_url: "https://devsamurai.com.br",
       language: "JavaScript",
     },
     {
+      id: "2",
       name: "Repo 2",
       description: "Descrição",
       hmtl_url: "https://devsamurai.com.br",
       language: "JavaScript",
     },
     {
+      id: "3",
       name: "Repo 3",
       description: "Descrição",
       hmtl_url: "https://devsamurai.com.br",
       language: "PHP",
     },
     {
+      id: "4",
       name: "Repo 4",
       description: "Descrição",
       hmtl_url: "https://devsamurai.com.br",
       language: "Ruby",
     },
     {
+      id: "5",
       name: "Repo 5",
       description: "Descrição",
       hmtl_url: "https://devsamurai.com.br",
       language: "CSS",
     },
     {
+      id: "6",
       name: "Repo 6",
       description: "Descrição",
       hmtl_url: "https://devsamurai.com.br",
@@ -68,7 +74,7 @@ export default function RepositoriesPage() {
       </Sidebar>
 
       <Main>
-        <Repositories />
+        <Repositories repositories={repositories} />
       </Main>
     </Container>
   );
