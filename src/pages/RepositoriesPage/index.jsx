@@ -3,73 +3,34 @@ import React, { useState, useEffect } from "react";
 import Profile from "./Profile";
 import Filter from "./Filter";
 import Repositories from "./Repositories/index";
-import { getUser, getLangsFrom } from "../../services/api";
+import { getUser, getRepos, getLangsFrom } from "../../services/api";
 
 import { Loading, Container, Sidebar, Main } from "./styles";
 
 export default function RepositoriesPage() {
   const [user, setUser] = useState();
+  const [repositories, setRepositories] = useState();
+  const [languages, setLanguages] = useState();
   const [currentLanguage, setCurrentLanguage] = useState();
   // controlar a tela loading
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadData = async () => {
-      const [userResponse] = await Promise.all([getUser("eric-moniz")]);
+      const [userResponse, repositoriesResponse] = await Promise.all([
+        getUser("eric-moniz"),
+        getRepos("eric-moniz"),
+      ]);
+
       setUser(userResponse.data);
+      setRepositories(repositoriesResponse.data);
+      setLanguages(getLangsFrom(repositoriesResponse.data));
 
       setLoading(false);
     };
 
     loadData();
   }, []);
-
-  const repositories = [
-    {
-      id: "1",
-      name: "Repo 1",
-      description: "Descrição",
-      hmtl_url: "https://devsamurai.com.br",
-      language: "JavaScript",
-    },
-    {
-      id: "2",
-      name: "Repo 2",
-      description: "Descrição",
-      hmtl_url: "https://devsamurai.com.br",
-      language: "JavaScript",
-    },
-    {
-      id: "3",
-      name: "Repo 3",
-      description: "Descrição",
-      hmtl_url: "https://devsamurai.com.br",
-      language: "PHP",
-    },
-    {
-      id: "4",
-      name: "Repo 4",
-      description: "Descrição",
-      hmtl_url: "https://devsamurai.com.br",
-      language: "Ruby",
-    },
-    {
-      id: "5",
-      name: "Repo 5",
-      description: "Descrição",
-      hmtl_url: "https://devsamurai.com.br",
-      language: "CSS",
-    },
-    {
-      id: "6",
-      name: "Repo 6",
-      description: "Descrição",
-      hmtl_url: "https://devsamurai.com.br",
-      language: "TypeScript",
-    },
-  ];
-
-  const languages = getLangsFrom(repositories);
 
   const onFilterClick = (language) => {
     setCurrentLanguage(language);
