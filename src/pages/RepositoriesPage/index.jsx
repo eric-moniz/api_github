@@ -1,23 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Profile from "./Profile";
 import Filter from "./Filter";
 import Repositories from "./Repositories/index";
-import { getLangsFrom } from "../../services/api";
+import { getUser, getLangsFrom } from "../../services/api";
 
-import { Container, Sidebar, Main } from "./styles";
+import { Loading, Container, Sidebar, Main } from "./styles";
 
 export default function RepositoriesPage() {
-  const user = {
-    name: "Dev Samurai",
-    login: "DevSamurai",
-    avatar_url: "https://avatars.githubusercontent.com/u/55540536?v=4",
-    followers: 120,
-    following: 16,
-    company: null,
-    blog: "https://devsamurai.com.br",
-    location: "São José dos Campos - SP",
-  };
+  const [user, setUser] = useState();
+  const [currentLanguage, setCurrentLanguage] = useState();
+  // controlar a tela loading
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const [userResponse] = await Promise.all([getUser("eric-moniz")]);
+      setUser(userResponse.data);
+
+      setLoading(false);
+    };
+
+    loadData();
+  }, []);
 
   const repositories = [
     {
@@ -65,11 +70,14 @@ export default function RepositoriesPage() {
   ];
 
   const languages = getLangsFrom(repositories);
-  const [currentLanguage, setCurrentLanguage] = useState();
 
   const onFilterClick = (language) => {
     setCurrentLanguage(language);
   };
+
+  if (loading) {
+    return <Loading>Carregando...</Loading>;
+  }
 
   return (
     <Container>
