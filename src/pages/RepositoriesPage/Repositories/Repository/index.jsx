@@ -16,7 +16,7 @@ function Repository({ repository }) {
 
       <Footer color={color}>
         <Lang>{repository.language}</Lang>
-        <Link href={repository.hmtl_url} target="_blank">
+        <Link href={repository.html_url} target="_blank">
           Ver
         </Link>
       </Footer>

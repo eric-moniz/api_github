@@ -53,7 +53,7 @@ export const Inner = styled.div`
 export const Data = styled.p`
   display: flex;
   align-items: center;
-  line-height: 1.5%;
+  line-height: 1.5;
 
   svg {
     margin-right: 10px;
