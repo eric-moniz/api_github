@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 import Profile from "./Profile";
 import Filter from "./Filter";
@@ -8,6 +9,8 @@ import { getUser, getRepos, getLangsFrom } from "../../services/api";
 import { Loading, Container, Sidebar, Main } from "./styles";
 
 export default function RepositoriesPage() {
+  const { login } = useParams();
+
   const [user, setUser] = useState();
   const [repositories, setRepositories] = useState();
   const [languages, setLanguages] = useState();
@@ -18,8 +21,8 @@ export default function RepositoriesPage() {
   useEffect(() => {
     const loadData = async () => {
       const [userResponse, repositoriesResponse] = await Promise.all([
-        getUser("eric-moniz"),
-        getRepos("eric-moniz"),
+        getUser(login),
+        getRepos(login),
       ]);
 
       setUser(userResponse.data);
